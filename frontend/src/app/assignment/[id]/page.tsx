@@ -22,6 +22,14 @@ import Header from '../../../components/Header';
 import { useStore, IQuestion } from '../../../store/useStore';
 import { useToast } from '../../../components/Toast';
 
+const isClient = typeof window !== 'undefined';
+const getBackendHost = () => {
+  if (!isClient) return 'http://localhost:5000';
+  const isStandaloneDev = window.location.port === '3000';
+  return isStandaloneDev ? 'http://localhost:5000' : `${window.location.protocol}//${window.location.host}`;
+};
+const BACKEND_HOST = getBackendHost();
+
 export default function AssignmentDetails() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
@@ -397,7 +405,7 @@ export default function AssignmentDetails() {
               </button>
 
               <a 
-                href={activeAssignment.pdfPath ? `http://localhost:5000${activeAssignment.pdfPath}` : '#'}
+                href={activeAssignment.pdfPath ? `${BACKEND_HOST}${activeAssignment.pdfPath}` : '#'}
                 download
                 onClick={(e) => {
                   if (!activeAssignment.pdfPath) {

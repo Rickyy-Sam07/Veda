@@ -57,8 +57,22 @@ interface StoreState {
   clearCreationLogs: () => void;
 }
 
-const API_BASE = 'http://localhost:5000/api';
-const WS_BASE = 'ws://localhost:5000';
+const isClient = typeof window !== 'undefined';
+const getEndpoints = () => {
+  if (!isClient) {
+    return { API_BASE: 'http://localhost:5000/api', WS_BASE: 'ws://localhost:5000' };
+  }
+  const host = window.location.host;
+  const protocol = window.location.protocol;
+  const isStandaloneDev = window.location.port === '3000';
+  
+  return {
+    API_BASE: isStandaloneDev ? 'http://localhost:5000/api' : `${protocol}//${host}/api`,
+    WS_BASE: isStandaloneDev ? 'ws://localhost:5000' : `${protocol === 'https:' ? 'wss:' : 'ws:'}//${host}`
+  };
+};
+
+const { API_BASE, WS_BASE } = getEndpoints();
 
 export const useStore = create<StoreState>((set, get) => ({
   assignments: [],

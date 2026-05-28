@@ -5,6 +5,14 @@ import { Sparkles, Calendar, Award, MessageSquare, Copy, FileDown, Check, Chevro
 import Header from '../../components/Header';
 import { useToast } from '../../components/Toast';
 
+const isClient = typeof window !== 'undefined';
+const getApiBase = () => {
+  if (!isClient) return 'http://localhost:5000/api';
+  const isStandaloneDev = window.location.port === '3000';
+  return isStandaloneDev ? 'http://localhost:5000/api' : `${window.location.protocol}//${window.location.host}/api`;
+};
+const API_BASE = getApiBase();
+
 export default function Toolkit() {
   const { showToast } = useToast();
   const [activeTab, setActiveTab] = useState('lesson');
@@ -102,7 +110,7 @@ export default function Toolkit() {
         comments: 'grade book comments',
         rubric: 'grading rubric'
       };
-      const res = await fetch('http://localhost:5000/api/toolkit/generate', {
+      const res = await fetch(`${API_BASE}/toolkit/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ tool: activeTab, topic, grade })
@@ -139,7 +147,7 @@ export default function Toolkit() {
     showToast('Compiling checklist PDF...', 'info');
 
     try {
-      const res = await fetch('http://localhost:5000/api/toolkit/export-pdf', {
+      const res = await fetch(`${API_BASE}/toolkit/export-pdf`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
