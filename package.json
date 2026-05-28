@@ -5,11 +5,10 @@
   "scripts": {
     "install-all": "npm install --prefix backend && npm install --prefix frontend && npm install",
     "build": "npm run build --prefix backend && npm run build --prefix frontend",
-    "dev": "concurrently --kill-others \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\" \"node proxy.js\"",
-    "start": "concurrently --kill-others \"npm run start --prefix backend\" \"npm run start --prefix frontend\" \"node proxy.js\""
+    "dev": "node proxy.js",
+    "start": "node proxy.js"
   },
   "dependencies": {
-    "concurrently": "^8.2.2",
     "http-proxy": "^1.18.1"
   }
 }
