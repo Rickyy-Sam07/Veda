@@ -1,0 +1,41 @@
+# Dependency directories
+**/node_modules/
+node_modules/
+
+# Next.js build outputs
+**/.next/
+.next/
+out/
+
+# TypeScript build info cache
+*.tsbuildinfo
+**/*.tsbuildinfo
+
+# Environmental variables (sensitive keys)
+**/.env*
+.env
+
+# Backend compiled uploads
+**/backend/uploads/*
+backend/uploads/
+uploads/
+
+# Logging outputs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE configurations
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

@@ -1,0 +1,298 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --font-outfit: 'Outfit', 'Inter', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+
+  /* Premium Harmony Palettes */
+  --bg-main: #f5f6f8;
+  --bg-sidebar: #ffffff;
+  --bg-card: #ffffff;
+  
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --text-muted: #9ca3af;
+
+  --accent-primary: #ea580c; /* Orange-Red Brand */
+  --accent-secondary: #f97316;
+  --accent-gradient: linear-gradient(135deg, #ea580c 0%, #f97316 100%);
+  --accent-glow: 0 0 15px rgba(234, 88, 12, 0.2);
+
+  --border-light: #e5e7eb;
+  --border-focus: #ea580c;
+
+  /* Difficulty Badges */
+  --easy-bg: #ecfdf5;
+  --easy-text: #059669;
+  --easy-border: #a7f3d0;
+
+  --medium-bg: #fffbeb;
+  --medium-text: #d97706;
+  --medium-border: #fde68a;
+
+  --hard-bg: #fef2f2;
+  --hard-text: #dc2626;
+  --hard-border: #fecaca;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-outfit);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-outfit);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
+}
+
+/* Scrollbar customization */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Animations helper */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-pulse-slow {
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.animate-spin-slow {
+  animation: spin 1s linear infinite;
+}
+
+/* Veda Layout Shell */
+.veda-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.veda-workspace {
+  margin-left: 260px; /* Width of fixed sidebar */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-main);
+  min-height: 100vh;
+}
+
+/* Global Print Stylesheet for flawless PDF/Print outputs */
+@media print {
+  body, html {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Hide app navigation, headers, forms, title rows, panel headers, and controls selectively */
+  .veda-sidebar, 
+  .veda-header, 
+  .left-panel, 
+  .parameter-form, 
+  .console-header,
+  .view-mode-toggles,
+  .console-actions,
+  .title-row,
+  .panel-title {
+    display: none !important;
+  }
+
+  /* Reset layout constraints so everything fits nicely on printed A4 */
+  .veda-layout {
+    display: block !important;
+    min-height: auto !important;
+    background: #ffffff !important;
+    width: 100% !important;
+  }
+
+  .veda-workspace {
+    margin-left: 0 !important;
+    padding: 0 !important;
+    background-color: #ffffff !important;
+    display: block !important;
+    min-height: auto !important;
+    width: 100% !important;
+  }
+
+  .toolkit-workspace {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  .right-panel {
+    width: 100% !important;
+    max-width: 100% !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    background-color: #ffffff !important;
+    margin: 0 !important;
+    display: block !important;
+  }
+
+  .ai-output-console {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .console-scroll-container {
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: block !important;
+  }
+
+  /* Checklist Items styles during print */
+  .checklist-item {
+    background-color: #ffffff !important;
+    border: 1px solid #d1d5db !important;
+    color: #000000 !important;
+    page-break-inside: avoid;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    margin-bottom: 8px !important;
+    padding: 10px 14px !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    border-radius: 8px !important;
+  }
+
+  .checklist-checkbox {
+    border: 2px solid #000000 !important;
+    background-color: #ffffff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    width: 18px !important;
+    height: 18px !important;
+    border-radius: 4px !important;
+    flex-shrink: 0 !important;
+    display: grid !important;
+    place-content: center !important;
+  }
+
+  .checklist-checkbox:checked {
+    border-color: #000000 !important;
+    background-color: #000000 !important;
+  }
+
+  .checklist-text {
+    color: #000000 !important;
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+    text-decoration: none !important; /* Keep readable on paper even if checked on screen */
+  }
+
+  .checklist-header {
+    color: #000000 !important;
+    border-left: 3px solid #000000 !important;
+    padding-left: 10px !important;
+    margin-top: 18px !important;
+    margin-bottom: 6px !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    page-break-after: avoid;
+  }
+
+  .checklist-normal-text {
+    color: #374151 !important;
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+  }
+
+  .checklist-divider {
+    height: 1px !important;
+    background-color: #d1d5db !important;
+    margin: 12px 0 !important;
+  }
+
+  pre.console-text {
+    font-family: 'Courier New', Courier, monospace !important;
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+    white-space: pre-wrap !important;
+    color: #000000 !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+}
+
+/* Global Mobile Viewport Layout Overrides */
+@media (max-width: 768px) {
+  .veda-sidebar {
+    display: none !important;
+  }
+  .veda-workspace {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+}
